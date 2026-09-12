@@ -1,11 +1,11 @@
 package com.mdhayat.mintfx.data.remote
 
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 interface CurrencyApiService {
-    @GET("latest")
+    @GET("{baseCurrency}")
     suspend fun getLatestRates(
-        @Query("from") baseCurrency: String = "USD"
-    ): FrankfurterRatesResponse
+        @Path("baseCurrency") baseCurrency: String = "USD"
+    ): ExchangeRateResponse
 }

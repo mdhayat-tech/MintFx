@@ -17,6 +17,10 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+private val preferredCurrencies = listOf(
+    "USD", "BDT", "EUR", "GBP", "INR", "JPY", "AUD", "CAD", "CHF", "CNY", "SGD", "AED", "SAR", "ZAR"
+)
+
 class CurrencyViewModel(
     private val repository: CurrencyRepository
 ) : ViewModel() {
@@ -45,13 +49,24 @@ class CurrencyViewModel(
         updateConvertedAmount()
     }
 
+    fun swapCurrencies() {
+        _uiState.update {
+            it.copy(
+                sourceCurrency = it.targetCurrency,
+                targetCurrency = it.sourceCurrency
+            )
+        }
+        updateConvertedAmount()
+    }
+
     fun refreshRates() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             repository.getRates()
                 .onSuccess { snapshot ->
                     rates = snapshot.rates
-                    val currencies = rates.keys.sorted()
+                    val currencies = preferredCurrencies.filter { it in rates } +
+                        rates.keys.filterNot { it in preferredCurrencies }.sorted()
                     _uiState.update { state ->
                         state.copy(
                             availableCurrencies = currencies,
@@ -93,7 +108,7 @@ class CurrencyViewModel(
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     val retrofit = Retrofit.Builder()
-                        .baseUrl("https://api.frankfurter.app/")
+                        .baseUrl("https://open.er-api.com/v6/latest/")
                         .addConverterFactory(
                             GsonConverterFactory.create(GsonBuilder().create())
                         )

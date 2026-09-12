@@ -10,3 +10,21 @@ data class CurrencyUiState(
     val isUsingCachedRates: Boolean = false,
     val errorMessage: String? = null
 )
+
+fun currencyLabel(code: String): String = when (code) {
+    "AED" -> "AED-(United Arab Emirates)"
+    "AUD" -> "AUD-(Australia)"
+    "BDT" -> "BDT-(Bangladesh)"
+    "CAD" -> "CAD-(Canada)"
+    "CHF" -> "CHF-(Switzerland)"
+    "CNY" -> "CNY-(China)"
+    "EUR" -> "EUR-(European Union)"
+    "GBP" -> "GBP-(United Kingdom)"
+    "INR" -> "INR-(India)"
+    "JPY" -> "JPY-(Japan)"
+    "SAR" -> "SAR-(Saudi Arabia)"
+    "SGD" -> "SGD-(Singapore)"
+    "USD" -> "USD-(United States)"
+    "ZAR" -> "ZAR-(South Africa)"
+    else -> code
+}

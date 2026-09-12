@@ -4,7 +4,7 @@ A cloud-buildable currency converter for Android using Kotlin, Jetpack Compose, 
 
 ## Offline behavior
 
-The app fetches the latest USD-based rates from the public Frankfurter API. A successful response replaces the JSON rates snapshot in SharedPreferences. If a request fails, the most recently cached rates are used and the UI displays `Using Cached Rates`.
+The app fetches the latest USD-based rates from the free ExchangeRate-API endpoint. A successful response replaces the JSON rates snapshot in SharedPreferences. If a request fails, the most recently cached rates are used and the UI displays `Using Cached Rates`.
 
 ## GitHub Actions
 

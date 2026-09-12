@@ -11,7 +11,7 @@ class CurrencyRepository(
         return try {
             val response = api.getLatestRates()
             val rates = buildMap {
-                put(response.base, 1.0)
+                put(response.base_code, 1.0)
                 putAll(response.rates)
             }
             cache.saveRates(rates)
