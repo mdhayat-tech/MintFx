@@ -1,4 +1,4 @@
-package com.mdhayat.mintfx.ui
+package com.mdhayat.mintfx
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn

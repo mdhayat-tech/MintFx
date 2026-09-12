@@ -3,7 +3,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MintFxApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_mintfx"
         android:label="@string/app_name"

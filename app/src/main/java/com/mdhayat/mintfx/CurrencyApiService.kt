@@ -1,4 +1,4 @@
-package com.mdhayat.mintfx.data.remote
+package com.mdhayat.mintfx
 
 import retrofit2.http.GET
 import retrofit2.http.Path

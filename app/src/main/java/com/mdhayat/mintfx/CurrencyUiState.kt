@@ -1,4 +1,4 @@
-package com.mdhayat.mintfx.ui
+package com.mdhayat.mintfx
 
 data class CurrencyUiState(
     val amountInput: String = "1",

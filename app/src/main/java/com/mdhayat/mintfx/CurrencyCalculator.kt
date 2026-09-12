@@ -1,4 +1,4 @@
-package com.mdhayat.mintfx.domain
+package com.mdhayat.mintfx
 
 import java.util.Locale
 

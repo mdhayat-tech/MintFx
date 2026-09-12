@@ -1,4 +1,4 @@
-package com.mdhayat.mintfx.data.remote
+package com.mdhayat.mintfx
 
 data class ExchangeRateResponse(
     val base_code: String,

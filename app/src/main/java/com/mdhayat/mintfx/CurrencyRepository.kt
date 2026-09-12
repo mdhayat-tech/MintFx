@@ -1,7 +1,4 @@
-package com.mdhayat.mintfx.data.repository
-
-import com.mdhayat.mintfx.data.local.CurrencyPreferences
-import com.mdhayat.mintfx.data.remote.CurrencyApiService
+package com.mdhayat.mintfx
 
 class CurrencyRepository(
     private val api: CurrencyApiService,

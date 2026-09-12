@@ -1,13 +1,9 @@
-package com.mdhayat.mintfx.ui
+package com.mdhayat.mintfx
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.mdhayat.mintfx.data.local.CurrencyPreferences
-import com.mdhayat.mintfx.data.remote.CurrencyApiService
-import com.mdhayat.mintfx.data.repository.CurrencyRepository
-import com.mdhayat.mintfx.domain.CurrencyCalculator
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

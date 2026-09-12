@@ -1,4 +1,4 @@
-package com.mdhayat.mintfx.data.local
+package com.mdhayat.mintfx
 
 import android.content.Context
 import com.google.gson.Gson
