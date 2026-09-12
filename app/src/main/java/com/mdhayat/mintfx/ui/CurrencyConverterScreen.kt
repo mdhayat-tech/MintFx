@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CurrencyConverterScreen(viewModel: CurrencyViewModel) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
