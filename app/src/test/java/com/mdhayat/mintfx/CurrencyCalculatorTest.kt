@@ -5,16 +5,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class CurrencyCalculatorTest {
-
     @Test
-    fun `convert returns formatted amount`() {
-        val converted = CurrencyCalculator.convert("10.5", 1.25)
-        assertEquals("13.12", converted)
+    fun convertsBetweenRatesRelativeToTheSameBase() {
+        assertEquals("15.00", CurrencyCalculator.convert(10.0, 0.8, 1.2))
     }
 
     @Test
-    fun `convert handles invalid input safely`() {
-        val converted = CurrencyCalculator.convert("abc", 2.0)
-        assertEquals("0.00", converted)
+    fun invalidRateReturnsZero() {
+        assertEquals("0.00", CurrencyCalculator.convert(10.0, 0.0, 1.2))
     }
 }

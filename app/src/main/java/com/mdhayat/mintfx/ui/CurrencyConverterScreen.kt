@@ -8,10 +8,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -28,42 +28,33 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-fun CurrencyConverterScreen(viewModel: CurrencyViewModel = hiltViewModel()) {
+fun CurrencyConverterScreen(viewModel: CurrencyViewModel) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "MintFx Currency Converter") },
+                title = { Text("MintFx") },
                 actions = {
-                    TextButton(onClick = viewModel::refreshRates) {
-                        Text(text = "Refresh")
-                    }
+                    TextButton(onClick = viewModel::refreshRates) { Text("Refresh") }
                 }
             )
         }
     ) { padding ->
         Column(
-            modifier = Modifier
-                .padding(padding)
-                .padding(16.dp),
+            modifier = Modifier.padding(padding).padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            if (state.isLoading) {
-                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-            }
+            if (state.isLoading) LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
 
             if (state.isUsingCachedRates) {
                 Text(
                     text = "Using Cached Rates",
-                    modifier = Modifier
-                        .background(Color(0xFFFFF3CD))
-                        .padding(horizontal = 12.dp, vertical = 8.dp),
-                    color = Color(0xFF7A5D00),
+                    modifier = Modifier.background(Color(0xFFFFF3CD)).padding(10.dp),
+                    color = Color(0xFF6B5200),
                     style = MaterialTheme.typography.labelLarge
                 )
             }
@@ -93,29 +84,13 @@ fun CurrencyConverterScreen(viewModel: CurrencyViewModel = hiltViewModel()) {
                 )
             }
 
-            Text(
-                text = "Converted Amount",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold
-            )
-            Text(
-                text = "${state.convertedAmount} ${state.targetCurrency}",
-                style = MaterialTheme.typography.headlineSmall
-            )
+            Text("Converted Amount", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+            Text("${state.convertedAmount} ${state.targetCurrency}", style = MaterialTheme.typography.headlineSmall)
 
-            state.errorMessage?.let { message ->
-                Text(
-                    text = message,
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
+            state.errorMessage?.let { Text(it, color = MaterialTheme.colorScheme.error) }
 
-            Button(
-                onClick = viewModel::refreshRates,
-                modifier = Modifier.width(180.dp)
-            ) {
-                Text(text = "Fetch Latest Rates")
+            Button(onClick = viewModel::refreshRates, modifier = Modifier.width(180.dp)) {
+                Text("Fetch Latest Rates")
             }
         }
     }
@@ -124,7 +99,7 @@ fun CurrencyConverterScreen(viewModel: CurrencyViewModel = hiltViewModel()) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CurrencyDropdown(
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
     label: String,
     options: List<String>,
     selected: String,
@@ -138,25 +113,20 @@ private fun CurrencyDropdown(
         modifier = modifier
     ) {
         OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .menuAnchor(),
+            modifier = Modifier.fillMaxWidth().menuAnchor(),
             value = selected,
             onValueChange = {},
             readOnly = true,
-            label = { Text(text = label) },
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            }
+            label = { Text(label) },
+            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) }
         )
-
         ExposedDropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
             options.forEach { option ->
                 DropdownMenuItem(
-                    text = { Text(text = option) },
+                    text = { Text(option) },
                     onClick = {
                         onSelected(option)
                         expanded = false
